@@ -7,7 +7,7 @@ import com.emreaytac.mvvm_hilt_stateflow_movies.domain.models.Movie
 
 fun Results.toMoviesEntity(): MoviesEntity{
     return MoviesEntity(
-        id = id!!,
+        //id = id!!,
         adult = adult,
         originalLanguage = original_language,
         originalTitle = original_title,
@@ -17,13 +17,15 @@ fun Results.toMoviesEntity(): MoviesEntity{
         releaseDate = release_date,
         title = title,
         voteAverage = vote_average,
-        voteCount = vote_count
+        voteCount = vote_count,
+        remoteId = id!!
     )
 }
 
 fun MoviesEntity.toMovies(): Movie {
     return Movie(
         id = id,
+        remoteId = remoteId,
         adult = adult,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,

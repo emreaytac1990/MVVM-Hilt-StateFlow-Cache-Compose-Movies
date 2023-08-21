@@ -10,6 +10,6 @@ import dagger.hilt.components.SingletonComponent
 interface MoviesUseCaseModule {
 
     @Binds
-    fun provideMoviesUseCaseImp(useCase: MoviesUseCaseImp): MoviesUseCase
+    fun provideMoviesUseCaseImpl(useCase: MoviesUseCaseImpl): MoviesUseCase
 
 }

@@ -15,11 +15,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class MoviesUseCaseImpl {
 
-}
 
-class MoviesUseCaseImp @Inject constructor(
+class MoviesUseCaseImpl @Inject constructor(
     private val apiService: MoviesApiService,
     private val database: MoviesDatabase
 ) : MoviesUseCase {

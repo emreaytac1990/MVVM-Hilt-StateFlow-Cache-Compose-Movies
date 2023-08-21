@@ -14,16 +14,9 @@ import com.emreaytac.mvvm_hilt_stateflow_movies.ui.movies.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Surface(modifier = Modifier.fillMaxSize()) {
-                val viewModel = hiltViewModel<MoviesViewModel>()
-                viewModel.getMovies()
-                val movies = viewModel.movies.collectAsLazyPagingItems()
-                MoviesScreen(movies = movies)
-            }
-        }
+        setContentView(R.layout.activity_main)
     }
 }

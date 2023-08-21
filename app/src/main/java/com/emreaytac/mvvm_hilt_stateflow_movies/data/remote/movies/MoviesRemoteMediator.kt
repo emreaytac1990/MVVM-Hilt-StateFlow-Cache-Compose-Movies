@@ -72,15 +72,12 @@ class MoviesRemoteMediator @Inject constructor(
                 }
                 val prevKey = if (page > 1) page - 1 else null
                 val nextKey = if (endOfPaginationReached) null else page + 1
-                val remoteKeys = movies?.mapNotNull { res ->
-                    res.id?.let {
-                        MoviesRemoteKeys(
-                            id = it,
-                            prevKey = prevKey,
-                            currentPage = page,
-                            nextKey = nextKey
-                        )
-                    }
+                val remoteKeys = movies?.map {
+                    MoviesRemoteKeys(
+                        prevKey = prevKey,
+                        currentPage = page,
+                        nextKey = nextKey
+                    )
                 }
 
                 remoteKeys?.let {

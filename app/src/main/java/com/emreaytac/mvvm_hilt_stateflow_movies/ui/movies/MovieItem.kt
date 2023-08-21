@@ -25,7 +25,7 @@ import com.emreaytac.mvvm_hilt_stateflow_movies.data.utils.toImageUrl
 import com.emreaytac.mvvm_hilt_stateflow_movies.domain.models.Movie
 
 @Composable
-fun BeerItem(
+fun MovieItem(
     movie: Movie,
     modifier: Modifier = Modifier
 ){

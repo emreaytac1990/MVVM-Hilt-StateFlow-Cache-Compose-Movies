@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -18,10 +19,12 @@ android {
         val baseUrl = rootProject.properties["MOVIES_BASE_URL"].toString()
         val imageBaseUrl = rootProject.properties["MOVIES_BASE_IMAGE_URL"].toString()
         val apiKey = rootProject.properties["API_KEY"].toString()
+        val authKey = rootProject.properties["AUTHORIZATION_KEY"].toString()
 
         buildConfigField("String", "BASE_URL", baseUrl)
         buildConfigField("String", "IMAGE_BASE_URL", imageBaseUrl)
         buildConfigField("String", "API_KEY", apiKey)
+        buildConfigField("String", "AUTHORIZATION_KEY", authKey)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,6 +57,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    viewBinding{
+        enable = true
+    }
 }
 
 dependencies {
@@ -70,6 +76,10 @@ dependencies {
     implementation ("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation ("androidx.compose.material3:material3:1.1.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.06.01"))
+
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.5.0")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.5.0")
+
 
     //Coil Compose
     implementation ("io.coil-kt:coil-compose:2.2.2")
@@ -98,6 +108,11 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.5.2")
     implementation ("androidx.room:room-paging:2.5.2")
 
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    kapt ("com.github.bumptech.glide:compiler:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
     //Hilt Test
     testImplementation("com.google.dagger:hilt-android-testing:2.44")
     kaptTest("com.google.dagger:hilt-android-compiler:2.44")
@@ -115,8 +130,6 @@ class RoomSchemaArgProvider(
 ) : CommandLineArgumentProvider {
 
     override fun asArguments(): Iterable<String> {
-        // Note: If you're using KSP, change the line below to return
-        // listOf("room.schemaLocation=${schemaDir.path}").
         return listOf("-Aroom.schemaLocation=${schemaDir.path}")
     }
 }

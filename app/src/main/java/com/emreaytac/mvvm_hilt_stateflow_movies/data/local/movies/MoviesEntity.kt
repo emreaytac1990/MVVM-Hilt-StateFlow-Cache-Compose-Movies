@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 @Entity
 data class MoviesEntity (
     val adult            : Boolean?,
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "movie_id")
-    val id               : Int    ,
+    val id               : Int     = 0,
+    val remoteId         : Int    ,
     val originalLanguage : String? ,
     val originalTitle    : String? ,
     val overview         : String? ,
@@ -25,9 +26,9 @@ data class MoviesEntity (
 
 @Entity
 data class MoviesRemoteKeys(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "movie_id")
-    val id: Int,
+    val id: Int = 0,
     val prevKey: Int?,
     val currentPage: Int,
     val nextKey: Int?,

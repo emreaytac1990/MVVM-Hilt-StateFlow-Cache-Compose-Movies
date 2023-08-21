@@ -1,6 +1,7 @@
 package com.emreaytac.mvvm_hilt_stateflow_movies.ui.movies
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,11 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
+import com.emreaytac.mvvm_hilt_stateflow_movies.R
 import com.emreaytac.mvvm_hilt_stateflow_movies.domain.models.Movie
 
 @Composable
 fun MoviesScreen(
-    movies: LazyPagingItems<Movie>
+    movies: LazyPagingItems<Movie>,
+    onNavigate: (Int, Int) -> Unit
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = movies.loadState){
@@ -47,9 +50,12 @@ fun MoviesScreen(
                 ){
                     val movie = movies[it]
                     if (movie != null){
-                        BeerItem(
+                        MovieItem(
                             movie = movie,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth().clickable {
+                                onNavigate(R.id.action_moviesFragment_to_movieDetailFragment, movie.remoteId)
+                                //Toast.makeText(context, "Tıklandı", Toast.LENGTH_LONG).show()
+                            }
                         )
                     }
                 }
